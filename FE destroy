@@ -1,0 +1,27 @@
+local rem = game:GetService("ReplicatedStorage").BloxbizRemotes.CatalogOnApplyOutfit
+
+
+function reset_pos(base_part)
+	rem:FireServer(
+		{
+			Accessories = {
+				base_part
+			}
+		}
+	)
+end
+
+lp = game:GetService('Players').LocalPlayer
+
+lp:GetMouse().Button1Down:Connect(function()
+	local t = lp:GetMouse().Target
+	local e = Instance.new('Explosion')
+	e.DestroyJointRadiusPercent = 0
+
+	e.Position = t.Position
+	e.Parent = workspace
+	reset_pos(t)
+	--t.Position = Vector3.new(0,0,0)
+	wait(.5)
+	e:Destroy()
+end)
